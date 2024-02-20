@@ -1,0 +1,41 @@
+{% set name = "sseclient-py" %}
+{% set version = "1.8.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: c547c5c1a7633230a38dc599a21a2dc638f9b5c297286b48b46b935c71fac3e8
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - sseclient
+
+about:
+  home: "https://github.com/mpetazzoni/sseclient"
+  license: Apache Software v2
+  license_family: APACHE
+  license_file: 
+  summary: "SSE client for Python"
+  doc_url: 
+  dev_url: 
+
+extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/46266
+    reason: Client request
+  recipe-maintainers:
+    - ianaobi

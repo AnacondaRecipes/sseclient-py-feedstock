@@ -1,0 +1,54 @@
+{% set name = "sseclient-py" %}
+{% set version = "1.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: c547c5c1a7633230a38dc599a21a2dc638f9b5c297286b48b46b935c71fac3e8
+  - url: https://github.com/mpetazzoni/sseclient/archive/refs/tags/{{ name }}-{{ version }}.tar.gz
+    sha256: 7fdb8b6c72865a462f6b83926c4395b75a48aac0584c5c7b998face195fb84be
+    folder: gh
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+test:
+  source_files:
+    - gh/tests
+  imports:
+    - sseclient
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - python -m unittest gh/tests/unittests.py
+  requires:
+    - pip
+    - pytest
+
+about:
+  home: https://github.com/mpetazzoni/sseclient
+  summary: SSE client for Python
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: A Python client for SSE event sources that seamlessly integrates with urllib3 and requests.
+  description: A Python client for SSE event sources that seamlessly integrates with urllib3 and requests.
+  dev_url: https://github.com/mpetazzoni/sseclient
+  doc_url: https://github.com/mpetazzoni/sseclient
+
+extra:
+  recipe-maintainers:
+    - sanurielf
+    - mpetazzoni

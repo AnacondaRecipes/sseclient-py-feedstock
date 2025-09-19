@@ -45,4 +45,4 @@ about:
   summary: A Python client for SSE event sources that seamlessly integrates with urllib3 and requests.
   description: A Python client for SSE event sources that seamlessly integrates with urllib3 and requests.
   dev_url: https://github.com/mpetazzoni/sseclient
-  doc_url: https://github.com/mpetazzoni/sseclient
+  doc_url: https://github.com/mpetazzoni/sseclient/blob/master/README.rst

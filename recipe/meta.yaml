@@ -29,13 +29,13 @@ test:
     - gh/tests
   imports:
     - sseclient
+  requires:
+    - pip
+    - pytest
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - python -m unittest gh/tests/unittests.py
-  requires:
-    - pip
-    - pytest
 
 about:
   home: https://github.com/mpetazzoni/sseclient

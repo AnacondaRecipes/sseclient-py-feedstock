@@ -39,7 +39,6 @@ test:
 
 about:
   home: https://github.com/mpetazzoni/sseclient
-  summary: SSE client for Python
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -47,8 +46,3 @@ about:
   description: A Python client for SSE event sources that seamlessly integrates with urllib3 and requests.
   dev_url: https://github.com/mpetazzoni/sseclient
   doc_url: https://github.com/mpetazzoni/sseclient
-
-extra:
-  recipe-maintainers:
-    - sanurielf
-    - mpetazzoni

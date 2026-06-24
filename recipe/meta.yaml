@@ -1,14 +1,16 @@
 {% set name = "sseclient-py" %}
-{% set version = "1.9.0" %}
+{% set version = "1.8.0" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  # No pypi package available yet for version 1.9.0, so use github source.
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: c547c5c1a7633230a38dc599a21a2dc638f9b5c297286b48b46b935c71fac3e8
   - url: https://github.com/mpetazzoni/sseclient/archive/refs/tags/{{ name }}-{{ version }}.tar.gz
-    sha256: 467b6abcc5833e17195c0be6a18f599cb2a3a784f5ec16d539e5d1d6273d3745
+    sha256: 7fdb8b6c72865a462f6b83926c4395b75a48aac0584c5c7b998face195fb84be
+    folder: gh
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
@@ -19,13 +21,12 @@ requirements:
     - python
     - pip
     - setuptools
-    - hatchling
   run:
     - python
 
 test:
   source_files:
-    - tests
+    - gh/tests
   imports:
     - sseclient
   requires:
@@ -34,7 +35,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv tests
+    - python -m unittest gh/tests/unittests.py
 
 about:
   home: https://github.com/mpetazzoni/sseclient
